@@ -4,6 +4,6 @@ export type PostType = {
     category: string;
     author: string;
     content: string;
-    date: Date;
+    date: string;
     imageUrl: string;
 }

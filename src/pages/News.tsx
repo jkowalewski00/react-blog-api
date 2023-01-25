@@ -1,6 +1,7 @@
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { MDBBtn } from 'mdb-react-ui-kit';
+
 
 function News() {
   const [news, setNews] = useState([]);
@@ -37,28 +38,29 @@ function News() {
       : 0;
   });
 
-  return (
-    <div>
-      <input
-        type="text"
-        placeholder="Search news"
-        value={searchTerm}
-        onChange={handleSearch}
-      />
-      <select value={sortBy} onChange={(e) => handleSort(e.target.value)}>
-        <option value="date">Sort by date</option>
-        <option value="title">Sort by title</option>
-      </select>
-      {sortedNews.map((article, index) => (
-        <div key={index}>
-          <h2>{article['title']}</h2>
-          <p>{article['description']}</p>
-          <img height="150" src={article['urlToImage']} alt={article['title']}/>
-        <footer>Source: {article['source']['name']}</footer>
-        </div>
-      ))}
-    </div>
-  );
+  const addToFavorites = (article:any) => {
+    axios.post('http://localhost:3000/favorites', article)
+    .then(res => console.log(res.data))
 }
+
+  return ( <div>
+    <h1>New news</h1>
+    <input type="text" placeholder="Search news" value={searchTerm} onChange={handleSearch} />
+    
+    <select className="custom-select" value={sortBy} onChange={(e)=> handleSort(e.target.value)}> <br></br>
+      <option value="date">Sort by date</option>
+      <option value="title" >Sort by title</option>
+    </select>
+    <div style={{display: 'flex', flexWrap: 'wrap'}}> {sortedNews.map((article, index) => ( <div key={index} style={{flex: '1 0 30%', margin: '1em'}}>
+    <a className='custom-link' href={article['url']} target="_blank" rel="noopener noreferrer">
+  <h2>{article['title']}</h2>
+</a>
+        <p>{article['description']}</p>
+        <img height="150" src={article['urlToImage']} alt={article['title']} />
+        <footer>Source: {article['source']['name']}</footer>
+        <MDBBtn className="custom-button" onClick={()=> addToFavorites(article)}>Add to favorites</MDBBtn>
+      </div> ))} </div>
+  </div> ); 
+  }
 
 export default News;

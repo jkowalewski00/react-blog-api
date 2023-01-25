@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { userInfo } from 'os'
 import validation from '../components/RegisterValidator'
+import { addUser } from '../services/api-service'
 import { toast } from 'react-toastify'
 
 const Register = () => {
@@ -81,7 +82,7 @@ const Register = () => {
 	}
 
 	const uploadData = async (userData: UserType) =>{
-		const response : any =  await axios.post("http://localhost:5000/users", userData);
+		const response : any =  await addUser(userData);
 		setFormValue({
 			name: '',
 			username: '',
@@ -112,34 +113,78 @@ const Register = () => {
 		setFormIsSubmitetd(true)
 	}
 
-    return (
-        <>
-            <div className="container">
-                <form method="POST">
-                    <label htmlFor="name" className="form-label">Name</label>
-                    <input type="text" name="name" className="form-control" placeholder="Put your name here..." value={formValue.name}
-                        onChange={handleChange} />
-                    {errors.name && <p style={{color: "red"}}>{errors.name}</p>}
-                    <label htmlFor="username" className="form-label">Username</label>
-                    <input type="text" name="username" className="form-control" placeholder="Put your username here..." value={formValue.username} onChange={handleChange} />
-                    {errors.username && <p style={{color: "red"}}>{errors.username}</p>}
-                    <label htmlFor="email" className="form-label">Email</label>
-                    <input type="email" name="email" className="form-control" placeholder="Put you email here..." value={formValue.email} onChange={handleChange} />
-                    {errors.email && <p style={{color: "red"}}>{errors.email}</p>}
-                    <label htmlFor="password" className="form-label">Password</label>
-                    <input type="password" name="password" className="form-control" placeholder="Put your password here..." value={formValue.password} onChange={handleChange} />
-                    {errors.password && <p style={{color: "red"}}>{errors.password}</p>}
-                    {/* <label htmlFor="confirm-password" className="form-label">Confirm password</label>
+	// if (formIsSubmitted === true){
+	//   navigate("/");
+	//   toast.success("Account created successfully!");
+	// }
+
+	return (
+		<>
+			<div className='container'>
+				<form method='POST'>
+					<label htmlFor='name' className='form-label'>
+						Name
+					</label>
+					<input
+						type='text'
+						name='name'
+						className='form-control'
+						placeholder='Put your name here...'
+						value={formValue.name}
+						onChange={handleChange}
+					/>
+					{errors.name && <p style={{color: "red"}}>{errors.name}</p>}
+					<label htmlFor='username' className='form-label'>
+						Username
+					</label>
+					<input
+						type='text'
+						name='username'
+						className='form-control'
+						placeholder='Put your username here...'
+						value={formValue.username}
+						onChange={handleChange}
+					/>
+					{errors.username && <p style={{color: "red"}}>{errors.username}</p>}
+					<label htmlFor='email' className='form-label'>
+						Email
+					</label>
+					<input
+						type='email'
+						name='email'
+						className='form-control'
+						placeholder='Put you email here...'
+						value={formValue.email}
+						onChange={handleChange}
+					/>
+					{errors.email && <p style={{color: "red"}}>{errors.email}</p>}
+					<label htmlFor='password' className='form-label'>
+						Password
+					</label>
+					<input
+						type='password'
+						name='password'
+						className='form-control'
+						placeholder='Put your password here...'
+						value={formValue.password}
+						onChange={handleChange}
+					/>
+					{errors.password && <p style={{color: "red"}}>{errors.password}</p>}
+					{/* <label htmlFor="confirm-password" className="form-label">Confirm password</label>
                     <input type="password" name="confirm-password" className="form-control" placeholder="Confirm your password here..." onChange={handleOnChange} /> */}
-                    <input type="text" name="role" value="user" onChange={handleChange} hidden></input>
-                    <button type="submit" className="btn btn-secondary" onClick={handleFormSubmit}>Register</button>
-                </form>
-            </div>
-            <div className="container">
-                <p>You already have an account? Click <a href="/login">here </a>to log in!</p>
-            </div>
-        </>
-    )
+					<input type='text' name='role' value='user' onChange={handleChange} hidden></input>
+					<button type='submit' className='btn btn-secondary' onClick={handleFormSubmit}>
+						Register
+					</button>
+				</form>
+			</div>
+			<div className='container'>
+				<p>
+					You already have an account? Click <a href='/login'>here </a>to log in!
+				</p>
+			</div>
+		</>
+	)
 }
 
-export default Register;
+export default Register
