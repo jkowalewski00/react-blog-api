@@ -50,6 +50,9 @@ const Header = ({ appTitle }: HeaderType) => {
               <MDBNavbarItem>
                 <MDBNavbarLink href="/login">Login</MDBNavbarLink>
               </MDBNavbarItem>
+              <MDBNavbarItem>
+                <MDBNavbarLink href="/news">News</MDBNavbarLink>
+              </MDBNavbarItem>
               {user?.id && user?.role === 'admin'?(
                 <MDBNavbarItem>
                   <MDBNavbarLink href="/add-post">Add post</MDBNavbarLink>
