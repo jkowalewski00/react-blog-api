@@ -62,3 +62,24 @@ h1::after{
   font-weight: 600;
   font-family: monospace;
 }
+
+
+.custom-button {
+  background-color: #5dc9cf;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 15px;
+}
+
+.custom-select {
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  padding: 10px;
+  margin-left: 10px;
+}
+.custom-link{
+  color: black;
+  text-decoration:solid;
+}

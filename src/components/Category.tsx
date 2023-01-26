@@ -5,6 +5,8 @@ interface CategoryTypes {
   options: string[];
 }
 
+const colors = ["#F44336", "#9C27B0", "#3F51B5", "#4CAF50", "#FFC107", "#009688"];
+
 const Category = ({ handleCategory, options }: CategoryTypes) => {
   return (
     <MDBCard style={{ width: "18rem", marginTop: "20px" }}>
@@ -13,7 +15,7 @@ const Category = ({ handleCategory, options }: CategoryTypes) => {
         {options.map((item: string, index: number) => (
           <MDBListGroupItem
             key={index}
-            style={{ cursor: "pointer" }}
+            style={{ cursor: "pointer",background:colors[index%colors.length],color:'white' }}
             onClick={() => handleCategory(item)}>
             {item}
           </MDBListGroupItem>

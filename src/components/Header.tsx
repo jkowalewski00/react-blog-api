@@ -17,15 +17,21 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../redux/hooks";
 
 
+
 type HeaderType = {
   appTitle: string;
 };
 
 const Header = ({ appTitle }: HeaderType) => {
   const [showNavColorThird, setShowNavColorThird] = useState(false);
-  const user = useAppSelector(state => state.user.userData);
+  const user = useAppSelector((state) => state.user.userData);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
+  const addPost = async () => {
+    navigate(`/add-post`);
+  };
+
   return (
     <div>
       <MDBNavbar expand="lg" light style={{ backgroundColor: "#e3f2fd" }}>
@@ -47,15 +53,22 @@ const Header = ({ appTitle }: HeaderType) => {
                   Home
                 </MDBNavbarLink>
               </MDBNavbarItem>
-              <MDBNavbarItem>
-                <MDBNavbarLink href="/login">Login</MDBNavbarLink>
-              </MDBNavbarItem>
+              {!user?.id ? (
+                <MDBNavbarItem>
+                  <MDBNavbarLink href="/login" >
+                    Login
+                  </MDBNavbarLink>
+                </MDBNavbarItem>
+              ) : null}
               <MDBNavbarItem>
                 <MDBNavbarLink href="/news">News</MDBNavbarLink>
               </MDBNavbarItem>
               {user?.id && user?.role === 'admin'?(
                 <MDBNavbarItem>
-                  <MDBNavbarLink href="/add-post">Add post</MDBNavbarLink>
+                  <button className="btn btn-success" onClick={addPost}>
+                    Add post
+                  
+                  </button>
                 </MDBNavbarItem>) : null
               }
               {user?.id ?(
