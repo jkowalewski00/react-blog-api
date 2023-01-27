@@ -25,20 +25,21 @@ interface PostsTypes {
 }
 
 const colors = ["#F44336", "#9C27B0", "#3F51B5", "#4CAF50", "#FFC107", "#009688"];
+const categories = ["Automotive", "Food", "Science", "Policy", "Music", "Sport"];
 
 function getCategoryColor(categoryName:String) {
   switch(categoryName) {
-    case "Cat1":
+    case categories[0]:
       return colors[0];
-    case "Cat2":
+    case categories[1]:
       return colors[1];
-    case "Cat3":
+    case categories[2]:
       return colors[2];
-    case "Cat4":
+    case categories[3]:
       return colors[3];
-    case "Cat5":
+    case categories[4]:
       return colors[4];
-    case "Cat6":
+    case categories[5]:
       return colors[5]; 
     default:
       return "black";
